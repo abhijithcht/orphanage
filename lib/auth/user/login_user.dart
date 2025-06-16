@@ -17,7 +17,7 @@ class _LoginUserState extends State<LoginUser> {
   TextEditingController _username = TextEditingController();
   TextEditingController _password = TextEditingController();
 
-  getUserID() async {
+  void getUserID() async {
     final SharedPreferences shaPre = await SharedPreferences.getInstance();
     await shaPre.setString('get_uid_user', uidUser);
   }

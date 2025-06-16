@@ -30,14 +30,14 @@ ThemeData lightTheme = ThemeData(
     backgroundColor: Colors.grey[200],
     elevation: 0,
   ),
-  tabBarTheme: TabBarTheme(
+  tabBarTheme: TabBarThemeData(
     indicatorColor: Colors.white,
     labelColor: Colors.white,
     unselectedLabelColor: Colors.black,
     splashFactory: NoSplash.splashFactory,
     overlayColor: WidgetStateProperty.all(Colors.transparent),
   ),
-  cardTheme: CardTheme(
+  cardTheme: CardThemeData(
     color: Colors.blue[100],
     clipBehavior: Clip.antiAlias,
     margin: const EdgeInsets.symmetric(vertical: 10),

@@ -62,9 +62,9 @@ class _EventEditState extends State<EventEdit> {
     }
   }
 
-  update() async {
-    final response =
-        await http.post(Uri.parse("http://$iPAddress/Hope/admin_edit_event.php"), body: {
+  void update() async {
+    final response = await http
+        .post(Uri.parse("http://$iPAddress/Hope/admin_edit_event.php"), body: {
       "id": widget.eventUser.id.toString(),
       'name': _eventName.text.trim(),
       'event_date': _eventDate.text.trim(),
