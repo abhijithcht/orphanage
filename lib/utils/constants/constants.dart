@@ -1,2 +1,2 @@
-var iPAddress = "192.168.29.115";
-var uidUser = '';
+String iPAddress = '192.168.29.115';
+String uidUser = '';

@@ -32,13 +32,13 @@ class _SplashAdminState extends State<SplashAdmin> {
   }
 
   Future getValidationData() async {
-    SharedPreferences shaPre = await SharedPreferences.getInstance();
-    var obtainedEmail = shaPre.getString('get_id');
+    final shaPre = await SharedPreferences.getInstance();
+    final obtainedEmail = shaPre.getString('get_id');
     setState(() {
       sessionAdminKey = obtainedEmail;
     });
     if (kDebugMode) {
-      print("this is session value $sessionAdminKey");
+      print('this is session value $sessionAdminKey');
     }
   }
 
@@ -53,7 +53,7 @@ class _SplashAdminState extends State<SplashAdmin> {
             SizedBox(height: 10),
             CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-              strokeWidth: 4.0,
+              strokeWidth: 4,
             ),
           ],
         ),

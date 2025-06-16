@@ -6,7 +6,7 @@ import 'package:hope_orphanage/app_imports.dart';
 import 'package:http/http.dart' as http;
 
 class Payment extends StatefulWidget {
-  const Payment({super.key, required this.totalAmount});
+  const Payment({required this.totalAmount, super.key});
 
   final String totalAmount;
 
@@ -38,7 +38,7 @@ class _PaymentState extends State<Payment> {
   }
 
   Future<void> payment() async {
-    Map<String, String> mapedData = {
+    final var mapedData = <String, String>{
       'name': _name.text.trim(),
       'phone': _phone.text.trim(),
       'bank': _bank.text.trim(),
@@ -46,7 +46,7 @@ class _PaymentState extends State<Payment> {
       'total_amt': _total.text.trim(),
       'uid': uidUser,
     };
-    http.Response response =
+    final response =
         await http.post(Uri.parse(URL.payment), body: mapedData);
     if (response.body.isEmpty) {
       if (mounted) {
@@ -56,9 +56,9 @@ class _PaymentState extends State<Payment> {
         });
       }
     } else {
-      var data = jsonDecode(response.body);
-      var responseMessage = data["message"];
-      var responseError = data["error"];
+      final data = jsonDecode(response.body);
+      final responseMessage = data['message'];
+      final responseError = data['error'];
       if (responseError) {
         if (mounted) {
           setState(() {
@@ -101,7 +101,7 @@ class _PaymentState extends State<Payment> {
                 textCapitalization: TextCapitalization.sentences,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Name cannot be empty";
+                    return 'Name cannot be empty';
                   }
                 },
               ),
@@ -112,7 +112,7 @@ class _PaymentState extends State<Payment> {
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Phone number cannot be empty";
+                    return 'Phone number cannot be empty';
                   }
                 },
               ),
@@ -121,7 +121,7 @@ class _PaymentState extends State<Payment> {
                 hintText: 'Bank name',
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Bank name cannot be empty";
+                    return 'Bank name cannot be empty';
                   }
                 },
               ),
@@ -133,7 +133,7 @@ class _PaymentState extends State<Payment> {
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Bank name cannot be empty";
+                    return 'Bank name cannot be empty';
                   }
                 },
               ),
@@ -148,10 +148,7 @@ class _PaymentState extends State<Payment> {
               ELB(
                 onPressed: () {
                   if (payKey.currentState!.validate()) {
-                    setState(() {
-                      payment();
-                      //Navigator.pop(context);
-                    });
+                    setState(payment);
                   }
                 },
                 text: 'PAY',

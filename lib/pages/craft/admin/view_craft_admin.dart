@@ -15,20 +15,20 @@ class _CraftShopAdminState extends State<CraftShopAdmin> {
   Future<List<CraftModel>> getRequest() async {
     final response = await http.get(
       Uri.parse(
-        "http://$iPAddress/Hope/admin_craft_display.php",
+        'http://$iPAddress/Hope/admin_craft_display.php',
       ),
     );
-    var responseData = json.decode(response.body);
+    final responseData = json.decode(response.body);
     //Creating a list to store input data;
-    List<CraftModel> crafts = [];
-    for (var singleUser in responseData) {
-      CraftModel craft = CraftModel(
-        name: singleUser["name"].toString(),
-        id: singleUser["id"].toString(),
-        craftID: singleUser["craft_id"].toString(),
-        price: singleUser["price"].toString(),
-        description: singleUser["description"].toString(),
-        image: singleUser["image"].toString(),
+    final crafts = <CraftModel>[];
+    for (final singleUser in responseData) {
+      final craft = CraftModel(
+        name: singleUser['name'].toString(),
+        id: singleUser['id'].toString(),
+        craftID: singleUser['craft_id'].toString(),
+        price: singleUser['price'].toString(),
+        description: singleUser['description'].toString(),
+        image: singleUser['image'].toString(),
       );
       crafts.add(craft);
     }
@@ -39,7 +39,7 @@ class _CraftShopAdminState extends State<CraftShopAdmin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("C R A F T - S H O P"),
+        title: const Text('C R A F T - S H O P'),
       ),
       body: FutureBuilder(
         future: getRequest(),
@@ -53,11 +53,11 @@ class _CraftShopAdminState extends State<CraftShopAdmin> {
             );
           } else if (snapshot.hasError) {
             return Center(
-              child: Text("Error: ${snapshot.error}"),
+              child: Text('Error: ${snapshot.error}'),
             );
           } else if (!snapshot.hasData || snapshot.data.isEmpty) {
             return const Center(
-              child: Text("No crafts available."),
+              child: Text('No crafts available.'),
             );
           } else {
             return ListView.builder(
@@ -70,7 +70,6 @@ class _CraftShopAdminState extends State<CraftShopAdmin> {
                       height: 100,
                       width: 100,
                       decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
                         image: DecorationImage(
                           image: NetworkImage(
                             snapshot.data[index].image,
@@ -94,10 +93,10 @@ class _CraftShopAdminState extends State<CraftShopAdmin> {
                       );
                     },
                     title: Text(
-                      "Name: ${snapshot.data[index].name}",
+                      'Name: ${snapshot.data[index].name}',
                     ),
                     subtitle: Text(
-                      "Price: ${snapshot.data[index].price}",
+                      'Price: ${snapshot.data[index].price}',
                     ),
                   ),
                 );

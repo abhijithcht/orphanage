@@ -17,8 +17,8 @@ class _HomeAdminState extends State<HomeAdmin> {
         actions: [
           IconButton(
             onPressed: () async {
-              final SharedPreferences shaPre = await SharedPreferences.getInstance();
-              shaPre.remove("get_id");
+              final shaPre = await SharedPreferences.getInstance();
+              shaPre.remove('get_id');
 
               if (context.mounted) {
                 Navigator.pushReplacementNamed(context, '/login2');

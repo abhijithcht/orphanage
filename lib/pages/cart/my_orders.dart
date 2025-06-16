@@ -17,24 +17,24 @@ class _MyOrdersState extends State<MyOrders> {
 
   Future<List<CartModel>> getRequest() async {
     final sharedPrefs = await SharedPreferences.getInstance();
-    final ui = sharedPrefs.getString("get_uid_user");
-    String url = "${URL.viewOrderedItems}${ui!}";
+    final ui = sharedPrefs.getString('get_uid_user');
+    final url = '${URL.viewOrderedItems}${ui!}';
 
     final response = await http.get(Uri.parse(url));
 
-    var responseData = json.decode(response.body);
+    final responseData = json.decode(response.body);
 
-    List<CartModel> users = [];
-    for (var singleUser in responseData) {
-      CartModel user = CartModel(
-        id: singleUser["id"].toString(),
-        name: singleUser["name"].toString(),
-        image: singleUser["image"].toString(),
-        description: singleUser["description"].toString(),
-        craftID: singleUser["craft_id"].toString(),
-        price: singleUser["price"].toString(),
-        qty: singleUser["qty"].toString(),
-        cid: singleUser["cartid"].toString(),
+    final users = <CartModel>[];
+    for (final singleUser in responseData) {
+      final var user = CartModel(
+        id: singleUser['id'].toString(),
+        name: singleUser['name'].toString(),
+        image: singleUser['image'].toString(),
+        description: singleUser['description'].toString(),
+        craftID: singleUser['craft_id'].toString(),
+        price: singleUser['price'].toString(),
+        qty: singleUser['qty'].toString(),
+        cid: singleUser['cartid'].toString(),
       );
       users.add(user);
     }
@@ -45,12 +45,12 @@ class _MyOrdersState extends State<MyOrders> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "M Y  O R D E R S",
+        title: const Text(
+          'M Y  O R D E R S',
         ),
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             FutureBuilder(
@@ -65,11 +65,11 @@ class _MyOrdersState extends State<MyOrders> {
                           color: Colors.red.shade900,
                           strokeWidth: 5,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
-                        Text(
-                          "Loading...",
+                        const Text(
+                          'Loading...',
                           style: TextStyle(),
                         ),
                       ],
@@ -96,22 +96,22 @@ class _MyOrdersState extends State<MyOrders> {
                                         width:
                                             MediaQuery.of(context).size.width,
                                         padding:
-                                            EdgeInsets.fromLTRB(10, 15, 50, 15),
+                                            const EdgeInsets.fromLTRB(10, 15, 50, 15),
                                         child: Row(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
                                             ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(8.0),
+                                                  BorderRadius.circular(8),
                                               child: Image.network(
                                                 snapshot.data[index].image,
                                                 height: 100,
-                                                width: 100.0,
+                                                width: 100,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 20,
                                             ),
                                             Column(
@@ -119,10 +119,10 @@ class _MyOrdersState extends State<MyOrders> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "Name: ${snapshot.data[index].name}",
+                                                  'Name: ${snapshot.data[index].name}',
                                                 ),
                                                 Text(
-                                                  "Price: ${snapshot.data[index].price}",
+                                                  'Price: ${snapshot.data[index].price}',
                                                 ),
                                               ],
                                             ),

@@ -1,9 +1,4 @@
 class EventModel {
-  final String id;
-  final String name;
-  final String eventDate;
-  final String eventTime;
-  final String description;
 
   EventModel({
     required this.id,
@@ -12,15 +7,14 @@ class EventModel {
     required this.eventTime,
     required this.description,
   });
+  final String id;
+  final String name;
+  final String eventDate;
+  final String eventTime;
+  final String description;
 }
 
 class CraftModel {
-  final String id;
-  final String name;
-  final String craftID;
-  final String price;
-  final String description;
-  final String image;
 
   CraftModel({
     required this.id,
@@ -30,15 +24,15 @@ class CraftModel {
     required this.description,
     required this.image,
   });
+  final String id;
+  final String name;
+  final String craftID;
+  final String price;
+  final String description;
+  final String image;
 }
 
 class DonationModel {
-  final String name;
-  final String place;
-  final String phone;
-  final String amount;
-  final String bank;
-  final String account;
 
   DonationModel({
     required this.name,
@@ -48,13 +42,15 @@ class DonationModel {
     required this.bank,
     required this.account,
   });
+  final String name;
+  final String place;
+  final String phone;
+  final String amount;
+  final String bank;
+  final String account;
 }
 
 class FoodModel {
-  final String id;
-  final String date;
-  final String donor;
-  final String food;
 
   FoodModel({
     required this.id,
@@ -62,17 +58,13 @@ class FoodModel {
     required this.donor,
     required this.food,
   });
+  final String id;
+  final String date;
+  final String donor;
+  final String food;
 }
 
 class CartModel {
-  final String id;
-  final String craftID;
-  final String qty;
-  final String cid;
-  final String name;
-  final String price;
-  final String image;
-  final String description;
 
   CartModel({
     required this.id,
@@ -84,4 +76,12 @@ class CartModel {
     required this.image,
     required this.description,
   });
+  final String id;
+  final String craftID;
+  final String qty;
+  final String cid;
+  final String name;
+  final String price;
+  final String image;
+  final String description;
 }

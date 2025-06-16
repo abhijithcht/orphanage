@@ -2,6 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TFF extends StatelessWidget {
+
+  const TFF({
+    required this.controller, required this.hintText, super.key,
+    this.validator,
+    this.keyboardType = TextInputType.text,
+    this.onTap,
+    this.inputFormatters,
+    this.textInputAction = TextInputAction.next,
+    this.textCapitalization = TextCapitalization.none,
+    this.obscure = false,
+    this.onSaved,
+    this.focus = false,
+  });
   final TextEditingController controller;
   final dynamic validator;
   final String hintText;
@@ -13,21 +26,6 @@ class TFF extends StatelessWidget {
   final bool obscure;
   final void Function(String?)? onSaved;
   final bool focus;
-
-  const TFF({
-    super.key,
-    required this.controller,
-    this.validator,
-    required this.hintText,
-    this.keyboardType = TextInputType.text,
-    this.onTap,
-    this.inputFormatters,
-    this.textInputAction = TextInputAction.next,
-    this.textCapitalization = TextCapitalization.none,
-    this.obscure = false,
-    this.onSaved,
-    this.focus = false,
-  });
 
   @override
   Widget build(BuildContext context) {

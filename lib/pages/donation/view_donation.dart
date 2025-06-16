@@ -14,17 +14,17 @@ class DonationView extends StatefulWidget {
 class _DonationViewState extends State<DonationView> {
   Future<List<DonationModel>> getRequest() async {
     final response = await http.get(Uri.parse(URL.viewDonationAdmin));
-    var responseData = jsonDecode(response.body);
+    final responseData = jsonDecode(response.body);
 
-    List<DonationModel> donations = [];
-    for (var singleUser in responseData) {
-      DonationModel donation = DonationModel(
-        name: singleUser["name"].toString(),
-        place: singleUser["place"].toString(),
-        phone: singleUser["phone"].toString(),
-        amount: singleUser["amount"].toString(),
-        bank: singleUser["bank"].toString(),
-        account: singleUser["account"].toString(),
+    final donations = <DonationModel>[];
+    for (final singleUser in responseData) {
+      final donation = DonationModel(
+        name: singleUser['name'].toString(),
+        place: singleUser['place'].toString(),
+        phone: singleUser['phone'].toString(),
+        amount: singleUser['amount'].toString(),
+        bank: singleUser['bank'].toString(),
+        account: singleUser['account'].toString(),
       );
       donations.add(donation);
     }

@@ -7,9 +7,9 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
 class CraftEdit extends StatefulWidget {
-  final CraftModel craftUser;
 
-  const CraftEdit({super.key, required this.craftUser});
+  const CraftEdit({required this.craftUser, super.key});
+  final CraftModel craftUser;
 
   @override
   State<CraftEdit> createState() => _CraftEditState();
@@ -54,21 +54,21 @@ class _CraftEditState extends State<CraftEdit> {
   }
 
   Future updateImage() async {
-    final uri = Uri.parse("http://$iPAddress/Hope/admin_edit_craft_item.php");
-    var request = http.MultipartRequest('POST', uri);
-    request.fields['id'] = widget.craftUser.id.toString();
+    final uri = Uri.parse('http://$iPAddress/Hope/admin_edit_craft_item.php');
+    final request = http.MultipartRequest('POST', uri);
+    request.fields['id'] = widget.craftUser.id;
     request.fields['price'] = price.text;
     request.fields['craft_id'] = craftID.text;
     request.fields['name'] = name.text;
     request.fields['description'] = description.text;
     print(request.fields['name']);
     if (_image != null) {
-      var pic = await http.MultipartFile.fromPath("image", _image.path);
-      print("**********************");
+      final pic = await http.MultipartFile.fromPath('image', _image.path);
+      print('**********************');
       print(_image);
       request.files.add(pic);
     }
-    var response = await request.send();
+    final response = await request.send();
     print(response);
 
     if (response.statusCode == 200) {
@@ -107,7 +107,7 @@ class _CraftEditState extends State<CraftEdit> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          "EDIT CRAFT ITEM",
+          'EDIT CRAFT ITEM',
         ),
       ),
       body: Form(
@@ -117,40 +117,40 @@ class _CraftEditState extends State<CraftEdit> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TFF(
-                hintText: "Craft ID",
+                hintText: 'Craft ID',
                 controller: craftID,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Craft ID cannot be empty";
+                    return 'Craft ID cannot be empty';
                   }
                 },
               ),
               TFF(
-                hintText: "Craft Item name",
+                hintText: 'Craft Item name',
                 controller: name,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Craft Item cannot be empty";
+                    return 'Craft Item cannot be empty';
                   }
                 },
               ),
               TFF(
-                hintText: "Item price",
+                hintText: 'Item price',
                 controller: price,
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Item price cannot be empty";
+                    return 'Item price cannot be empty';
                   }
                 },
               ),
               TFF(
-                hintText: "Item description",
+                hintText: 'Item description',
                 controller: description,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Description cannot be empty";
+                    return 'Description cannot be empty';
                   }
                 },
               ),
@@ -161,7 +161,7 @@ class _CraftEditState extends State<CraftEdit> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Choose Image",
+                    'Choose Image',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.green,
@@ -172,18 +172,14 @@ class _CraftEditState extends State<CraftEdit> {
                       Icons.photo_outlined,
                       size: 35,
                     ),
-                    onPressed: () {
-                      chooseImageGallery();
-                    },
+                    onPressed: chooseImageGallery,
                   ),
                   IconButton(
                     icon: const Icon(
                       Icons.camera_alt_outlined,
                       size: 35,
                     ),
-                    onPressed: () {
-                      chooseImageCamera();
-                    },
+                    onPressed: chooseImageCamera,
                   ),
                 ],
               ),

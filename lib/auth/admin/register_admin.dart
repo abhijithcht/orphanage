@@ -31,18 +31,18 @@ class _RegisterAdminState extends State<RegisterAdmin> {
   }
 
   Future submit() async {
-    Map mapedData = {
+    final Map mapedData = {
       'username': _username.text,
       'email': _email.text,
       'phone': _phone.text,
       'password': _password.text,
     };
 
-    http.Response response =
+    final var response =
         await http.post(Uri.parse(URL.registerAdmin), body: mapedData);
-    var data = jsonDecode(response.body);
-    var responseMessage = data["message"];
-    var responseError = data["error"];
+    final data = jsonDecode(response.body);
+    final responseMessage = data['message'];
+    final responseError = data['error'];
     if (responseError) {
       setState(() {
         status = false;
@@ -79,7 +79,7 @@ class _RegisterAdminState extends State<RegisterAdmin> {
                 focus: true,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Username cannot be empty";
+                    return 'Username cannot be empty';
                   }
                 },
               ),
@@ -89,7 +89,7 @@ class _RegisterAdminState extends State<RegisterAdmin> {
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "email cannot be empty";
+                    return 'email cannot be empty';
                   }
                 },
               ),
@@ -100,10 +100,10 @@ class _RegisterAdminState extends State<RegisterAdmin> {
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "phone number cannot be empty";
+                    return 'phone number cannot be empty';
                   }
                   if (value!.length != 10) {
-                    return "Please enter a valid phone number";
+                    return 'Please enter a valid phone number';
                   }
                   return null;
                 },
@@ -114,7 +114,7 @@ class _RegisterAdminState extends State<RegisterAdmin> {
                 obscure: true,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "password cannot be empty";
+                    return 'password cannot be empty';
                   }
                 },
               ),
@@ -125,7 +125,7 @@ class _RegisterAdminState extends State<RegisterAdmin> {
                 textInputAction: TextInputAction.done,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "password cannot be empty";
+                    return 'password cannot be empty';
                   }
                   if (_password.text != _confirmPassword.text) {
                     return "Passwords doesn't match";
@@ -139,9 +139,7 @@ class _RegisterAdminState extends State<RegisterAdmin> {
               ELB(
                 onPressed: () {
                   if (registerKey.currentState!.validate()) {
-                    setState(() {
-                      submit();
-                    });
+                    setState(submit);
                   }
                 },
                 text: 'REGISTER',

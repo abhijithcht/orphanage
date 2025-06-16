@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 
 class CraftDetails extends StatefulWidget {
   const CraftDetails({
-    super.key,
-    required this.craftID,
-    required this.name,
-    required this.price,
-    required this.description,
+    required this.craftID, required this.name, required this.price, required this.description, super.key,
     this.image,
   });
 
@@ -40,7 +36,7 @@ class _CraftDetailsState extends State<CraftDetails> {
               style: _style,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.network(

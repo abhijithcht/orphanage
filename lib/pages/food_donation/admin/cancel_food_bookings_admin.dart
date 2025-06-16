@@ -14,15 +14,15 @@ class FoodCancel extends StatefulWidget {
 class _FoodCancelState extends State<FoodCancel> {
   Future<List<FoodModel>> getRequest() async {
     final response = await http.get(Uri.parse(URL.viewFoodDonationUser));
-    var responseData = jsonDecode(response.body);
+    final responseData = jsonDecode(response.body);
 
-    List<FoodModel> foods = [];
-    for (var singleUser in responseData) {
-      FoodModel food = FoodModel(
-        id: singleUser["id"].toString(),
-        date: singleUser["date"].toString(),
-        donor: singleUser["donor"].toString(),
-        food: singleUser["food"].toString(),
+    final foods = <FoodModel>[];
+    for (final singleUser in responseData) {
+      final food = FoodModel(
+        id: singleUser['id'].toString(),
+        date: singleUser['date'].toString(),
+        donor: singleUser['donor'].toString(),
+        food: singleUser['food'].toString(),
       );
       foods.add(food);
     }
@@ -30,11 +30,11 @@ class _FoodCancelState extends State<FoodCancel> {
   }
 
   Future<void> deleteData(String id) async {
-    var res = await http.post(Uri.parse(URL.deleteFoodBookingAdmin), body: {
-      "id": id,
+    final res = await http.post(Uri.parse(URL.deleteFoodBookingAdmin), body: {
+      'id': id,
     });
-    var response = jsonDecode(res.body);
-    if (response["success"] == "true") {
+    final response = jsonDecode(res.body);
+    if (response['success'] == 'true') {
       print('success');
     }
   }
@@ -80,7 +80,7 @@ class _FoodCancelState extends State<FoodCancel> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8),
                             child: ListTile(
                               title: Text(snapshot.data![index].donor),
                               leading: Text(snapshot.data![index].food),
@@ -91,15 +91,15 @@ class _FoodCancelState extends State<FoodCancel> {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: const Text("Confirm Deletion"),
+                                        title: const Text('Confirm Deletion'),
                                         content: const Text(
-                                            "Are you sure you want to delete this craft?"),
+                                            'Are you sure you want to delete this craft?'),
                                         actions: [
                                           TextButton(
                                             onPressed: () {
                                               Navigator.of(context).pop();
                                             },
-                                            child: const Text("Cancel"),
+                                            child: const Text('Cancel'),
                                           ),
                                           TextButton(
                                             onPressed: () {
@@ -108,7 +108,7 @@ class _FoodCancelState extends State<FoodCancel> {
                                               Navigator.of(context).pop();
                                               setState(() {});
                                             },
-                                            child: const Text("Delete"),
+                                            child: const Text('Delete'),
                                           ),
                                         ],
                                       );

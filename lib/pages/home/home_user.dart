@@ -19,8 +19,8 @@ class _HomeUserState extends State<HomeUser> {
         actions: [
           IconButton(
             onPressed: () async {
-              final SharedPreferences shaPre = await SharedPreferences.getInstance();
-              shaPre.remove("get_id");
+              final shaPre = await SharedPreferences.getInstance();
+              shaPre.remove('get_id');
 
               if (context.mounted) {
                 Navigator.pushReplacementNamed(context, '/login1');
@@ -70,9 +70,9 @@ class _HomeUserState extends State<HomeUser> {
                 },
               ),
               ListTile(
-                title: Text('My Orders'),
+                title: const Text('My Orders'),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrders()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const MyOrders()));
                 },
               ),
             ],

@@ -32,7 +32,7 @@ class _DonationAddState extends State<DonationAdd> {
   }
 
   Future submit() async {
-    Map mapedData = {
+    final Map mapedData = {
       'name': _name.text.trim(),
       'place': _place.text.trim(),
       'phone': _phone.text.trim(),
@@ -41,7 +41,7 @@ class _DonationAddState extends State<DonationAdd> {
       'account': _account.text.trim(),
     };
 
-    http.Response response =
+    final response =
         await http.post(Uri.parse(URL.donateMoneyUser), body: mapedData);
     try {
       if (response.body.isEmpty) {
@@ -50,9 +50,9 @@ class _DonationAddState extends State<DonationAdd> {
           message = 'Empty response from the server.';
         });
       } else {
-        var data = jsonDecode(response.body);
-        var responseMessage = data["message"];
-        var responseError = data["error"];
+        final data = jsonDecode(response.body);
+        final responseMessage = data['message'];
+        final responseError = data['error'];
         if (responseError) {
           setState(() {
             status = false;
@@ -100,7 +100,7 @@ class _DonationAddState extends State<DonationAdd> {
                 textCapitalization: TextCapitalization.sentences,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Donation name cannot be empty";
+                    return 'Donation name cannot be empty';
                   }
                 },
               ),
@@ -110,7 +110,7 @@ class _DonationAddState extends State<DonationAdd> {
                 textCapitalization: TextCapitalization.sentences,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Place cannot be empty";
+                    return 'Place cannot be empty';
                   }
                 },
               ),
@@ -121,7 +121,7 @@ class _DonationAddState extends State<DonationAdd> {
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Phone number cannot be empty";
+                    return 'Phone number cannot be empty';
                   }
                 },
               ),
@@ -132,7 +132,7 @@ class _DonationAddState extends State<DonationAdd> {
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Amount cannot be empty";
+                    return 'Amount cannot be empty';
                   }
                 },
               ),
@@ -141,7 +141,7 @@ class _DonationAddState extends State<DonationAdd> {
                 hintText: 'Bank name',
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Bank name cannot be empty";
+                    return 'Bank name cannot be empty';
                   }
                 },
               ),
@@ -153,7 +153,7 @@ class _DonationAddState extends State<DonationAdd> {
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Bank name cannot be empty";
+                    return 'Bank name cannot be empty';
                   }
                 },
               ),

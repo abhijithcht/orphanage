@@ -31,7 +31,7 @@ class _FoodDonationState extends State<FoodDonation> {
   DateTime? selectedDate;
 
   Future<void> _selectDate(BuildContext context) async {
-    DateTime? picked = await showDatePicker(
+    final picked = await showDatePicker(
       context: context,
       initialDate: selectedDate ?? DateTime.now(),
       firstDate: DateTime(2000),
@@ -46,14 +46,14 @@ class _FoodDonationState extends State<FoodDonation> {
   }
 
   Future submit() async {
-    Map mapedData = {
+    final Map mapedData = {
       'date': _date.text.trim(),
       'donor': _donor.text.trim(),
       'food': _food.text.trim(),
       'uid': uidUser,
     };
 
-    http.Response response =
+    final response =
         await http.post(Uri.parse(URL.donateFoodUser), body: mapedData);
     try {
       if (response.body.isEmpty) {
@@ -62,9 +62,9 @@ class _FoodDonationState extends State<FoodDonation> {
           message = 'Empty response from the server.';
         });
       } else {
-        var data = jsonDecode(response.body);
-        var responseMessage = data["message"];
-        var responseError = data["error"];
+        final data = jsonDecode(response.body);
+        final responseMessage = data['message'];
+        final responseError = data['error'];
         if (responseError) {
           setState(() {
             status = false;
@@ -111,7 +111,7 @@ class _FoodDonationState extends State<FoodDonation> {
                 },
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Date cannot be empty";
+                    return 'Date cannot be empty';
                   }
                 },
               ),
@@ -121,7 +121,7 @@ class _FoodDonationState extends State<FoodDonation> {
                 textCapitalization: TextCapitalization.sentences,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Donor name cannot be empty";
+                    return 'Donor name cannot be empty';
                   }
                 },
               ),
@@ -131,7 +131,7 @@ class _FoodDonationState extends State<FoodDonation> {
                 textInputAction: TextInputAction.done,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Food name cannot be empty";
+                    return 'Food name cannot be empty';
                   }
                 },
               ),

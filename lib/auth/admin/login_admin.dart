@@ -19,16 +19,16 @@ class _LoginAdminState extends State<LoginAdmin> {
 
   Future login() async {
     final response = await http.post(Uri.parse(URL.loginAdmin), headers: {
-      'Accept': "application/json"
+      'Accept': 'application/json'
     }, body: {
       'username': _username.text,
       'password': _password.text,
     });
     try {
-      var data = json.decode(response.body);
+      final data = json.decode(response.body);
       if (data != null) {
-        for (var singleUser in data) {
-          final SharedPreferences shaPre =
+        for (final singleUser in data) {
+          final shaPre =
               await SharedPreferences.getInstance();
           await shaPre.setString('get_id', singleUser['id']);
         }
@@ -72,7 +72,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                 focus: true,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "username cannot be empty";
+                    return 'username cannot be empty';
                   }
                 },
               ),
@@ -83,7 +83,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                 textInputAction: TextInputAction.done,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "password cannot be empty";
+                    return 'password cannot be empty';
                   }
                 },
               ),
@@ -93,9 +93,7 @@ class _LoginAdminState extends State<LoginAdmin> {
               ELB(
                 onPressed: () {
                   if (loginKey.currentState!.validate()) {
-                    setState(() {
-                      login();
-                    });
+                    setState(login);
                   }
                 },
                 text: 'LOGIN',

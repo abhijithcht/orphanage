@@ -67,7 +67,7 @@ ThemeData lightTheme = ThemeData(
     indicatorColor: Colors.blue,
     backgroundColor: Colors.grey[200],
   ),
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     bodyLarge: TextStyle(
       color: Colors.black,
       fontSize: 16,

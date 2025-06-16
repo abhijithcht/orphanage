@@ -14,16 +14,16 @@ class EventView1 extends StatefulWidget {
 class _EventView1State extends State<EventView1> {
   Future<List<EventModel>> getRequest() async {
     final response = await http.get(Uri.parse(URL.viewEventAdmin));
-    var responseData = jsonDecode(response.body);
+    final responseData = jsonDecode(response.body);
 
-    List<EventModel> events = [];
-    for (var singleUser in responseData) {
-      EventModel event = EventModel(
-        id: singleUser["id"].toString(),
-        name: singleUser["name"].toString(),
-        eventDate: singleUser["event_date"].toString(),
-        eventTime: singleUser["event_time"].toString(),
-        description: singleUser["description"].toString(),
+    final events = <EventModel>[];
+    for (final singleUser in responseData) {
+      final var event = EventModel(
+        id: singleUser['id'].toString(),
+        name: singleUser['name'].toString(),
+        eventDate: singleUser['event_date'].toString(),
+        eventTime: singleUser['event_time'].toString(),
+        description: singleUser['description'].toString(),
       );
       events.add(event);
     }
@@ -31,11 +31,11 @@ class _EventView1State extends State<EventView1> {
   }
 
   Future<void> deleteData(String id) async {
-    var res = await http.post(Uri.parse(URL.deleteEventAdmin), body: {
-      "id": id,
+    final res = await http.post(Uri.parse(URL.deleteEventAdmin), body: {
+      'id': id,
     });
-    var response = jsonDecode(res.body);
-    if (response["success"] == "true") {
+    final response = jsonDecode(res.body);
+    if (response['success'] == 'true') {
       print('success');
     }
   }
@@ -81,7 +81,7 @@ class _EventView1State extends State<EventView1> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8),
                             child: ListTile(
                               title: Text(snapshot.data![index].name),
                               leading: IconButton(
@@ -115,15 +115,15 @@ class _EventView1State extends State<EventView1> {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        title: Text("Confirm Deletion"),
-                                        content: Text(
-                                            "Are you sure you want to delete this event?"),
+                                        title: const Text('Confirm Deletion'),
+                                        content: const Text(
+                                            'Are you sure you want to delete this event?'),
                                         actions: [
                                           TextButton(
                                             onPressed: () {
                                               Navigator.of(context).pop();
                                             },
-                                            child: Text("Cancel"),
+                                            child: const Text('Cancel'),
                                           ),
                                           TextButton(
                                             onPressed: () {
@@ -132,7 +132,7 @@ class _EventView1State extends State<EventView1> {
                                               Navigator.of(context).pop();
                                               setState(() {});
                                             },
-                                            child: Text("Delete"),
+                                            child: const Text('Delete'),
                                           ),
                                         ],
                                       );

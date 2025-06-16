@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 class CSB extends SnackBar {
   CSB({
-    super.key,
-    required String message,
+    required String message, super.key,
   }) : super(
           content: Text(message),
           behavior: SnackBarBehavior.floating,

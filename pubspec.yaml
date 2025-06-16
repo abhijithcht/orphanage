@@ -23,7 +23,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons:
-  flutter_lints:
+  very_good_analysis: ^9.0.0
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -33,16 +33,3 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-
-# Analysis options
-include: package:flutter_lints/flutter.yaml
-
-linter:
-  rules:
-    avoid_print: false
-    prefer_const_constructors_in_immutables: false
-    prefer_const_constructors: false
-    prefer_const_literals_to_create_immutables: false
-    prefer_final_fields: false
-    unnecessary_breaks: true
-    use_key_in_widget_constructors: false

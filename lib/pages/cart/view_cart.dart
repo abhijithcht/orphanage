@@ -15,23 +15,23 @@ class ViewCart extends StatefulWidget {
 class _ViewCartState extends State<ViewCart> {
   Future<List<CartModel>> getCartDetails() async {
     final shrdprfs = await SharedPreferences.getInstance();
-    final ui = shrdprfs.getString("get_id");
+    final ui = shrdprfs.getString('get_id');
 
-    String url = "${URL.viewCartUser}${ui!}";
+    final url = '${URL.viewCartUser}${ui!}';
     final response = await http.get(Uri.parse(url));
-    var responseData = jsonDecode(response.body);
+    final responseData = jsonDecode(response.body);
 
-    List<CartModel> items = [];
-    for (var singleUser in responseData) {
-      CartModel item = CartModel(
-        id: singleUser["id"].toString(),
-        name: singleUser["name"].toString(),
-        craftID: singleUser["craft_id"].toString(),
-        qty: singleUser["qty"].toString(),
-        description: singleUser["description"].toString(),
-        cid: singleUser["cartid"].toString(),
-        price: singleUser["price"].toString(),
-        image: singleUser["image"].toString(),
+    final items = <CartModel>[];
+    for (final singleUser in responseData) {
+      final item = CartModel(
+        id: singleUser['id'].toString(),
+        name: singleUser['name'].toString(),
+        craftID: singleUser['craft_id'].toString(),
+        qty: singleUser['qty'].toString(),
+        description: singleUser['description'].toString(),
+        cid: singleUser['cartid'].toString(),
+        price: singleUser['price'].toString(),
+        image: singleUser['image'].toString(),
       );
       items.add(item);
     }
@@ -39,11 +39,11 @@ class _ViewCartState extends State<ViewCart> {
   }
 
   Future deleteData(String id) async {
-    var res = await http.post(Uri.parse(URL.deleteCartUser), body: {
-      "id": id,
+    final res = await http.post(Uri.parse(URL.deleteCartUser), body: {
+      'id': id,
     });
-    var response = jsonDecode(res.body);
-    if (response["success"] == "true") {
+    final response = jsonDecode(res.body);
+    if (response['success'] == 'true') {
       print(id);
       getCartDetails();
     } else {
@@ -51,7 +51,7 @@ class _ViewCartState extends State<ViewCart> {
     }
   }
 
-  final _style = TextStyle(
+  const _style = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 20,
   );
@@ -60,7 +60,7 @@ class _ViewCartState extends State<ViewCart> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('M Y  C A R T'),
+        title: const Text('M Y  C A R T'),
       ),
       body: Column(
         children: [
@@ -84,7 +84,7 @@ class _ViewCartState extends State<ViewCart> {
                   child: Text('No items added to cart.'),
                 );
               } else {
-                List<CartModel>? user = snapshot.data;
+                final user = snapshot.data;
 
                 return Flexible(
                   child: Column(
@@ -110,21 +110,21 @@ class _ViewCartState extends State<ViewCart> {
                                 subtitle: Text(
                                     'Price: ${snapshot.data![index].price}'),
                                 trailing: IconButton(
-                                  icon: Icon(Icons.close_rounded),
+                                  icon: const Icon(Icons.close_rounded),
                                   onPressed: () {
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
-                                          title: Text("Confirm Deletion"),
-                                          content: Text(
-                                              "Are you sure you want to delete this event?"),
+                                          title: const Text('Confirm Deletion'),
+                                          content: const Text(
+                                              'Are you sure you want to delete this event?'),
                                           actions: [
                                             TextButton(
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                               },
-                                              child: Text("Cancel"),
+                                              child: const Text('Cancel'),
                                             ),
                                             TextButton(
                                               onPressed: () {
@@ -133,7 +133,7 @@ class _ViewCartState extends State<ViewCart> {
                                                 Navigator.of(context).pop();
                                                 setState(() {});
                                               },
-                                              child: Text("Delete"),
+                                              child: const Text('Delete'),
                                             ),
                                           ],
                                         );
@@ -159,12 +159,12 @@ class _ViewCartState extends State<ViewCart> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text(
-                                  "TOTAL",
+                                const Text(
+                                  'TOTAL',
                                   style: _style,
                                 ),
                                 Text(
-                                  "\$${returnTotalAmount(user!)}",
+                                  '\$${returnTotalAmount(user!)}',
                                   style: _style,
                                 ),
                               ],
@@ -172,7 +172,7 @@ class _ViewCartState extends State<ViewCart> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       ELB(
@@ -199,8 +199,8 @@ class _ViewCartState extends State<ViewCart> {
   }
 
   String returnTotalAmount(List<CartModel> user) {
-    double totalAmount = 0.0;
-    for (int i = 0; i < user.length; i++) {
+    var totalAmount = 0;
+    for (var i = 0; i < user.length; i++) {
       totalAmount = totalAmount +
           (double.parse(user[i].price) * double.parse(user[i].qty));
     }

@@ -6,11 +6,7 @@ import 'package:http/http.dart' as http;
 
 class AddToCart extends StatefulWidget {
   const AddToCart({
-    super.key,
-    required this.craftID,
-    required this.name,
-    required this.price,
-    required this.description,
+    required this.craftID, required this.name, required this.price, required this.description, super.key,
     this.image,
   });
 
@@ -25,7 +21,7 @@ class AddToCart extends StatefulWidget {
 }
 
 class _AddToCartState extends State<AddToCart> {
-  TextEditingController qty = TextEditingController(text: "1");
+  TextEditingController qty = TextEditingController(text: '1');
 
   final _style = const TextStyle(
     fontWeight: FontWeight.w500,
@@ -33,12 +29,12 @@ class _AddToCartState extends State<AddToCart> {
   );
 
   Future<void> addToCart() async {
-    Map<String, String> mapedData = {
+    final mapedData = <String, String>{
       'craft_id': widget.craftID,
       'qty': qty.text,
       'uid': uidUser,
     };
-    http.Response response =
+    final response =
         await http.post(Uri.parse(URL.addToCartUser), body: mapedData);
 
     if (response.body.isEmpty) {
@@ -46,8 +42,8 @@ class _AddToCartState extends State<AddToCart> {
         setState(() {});
       }
     } else {
-      var data = jsonDecode(response.body);
-      var responseError = data["error"];
+      final data = jsonDecode(response.body);
+      final responseError = data['error'];
       if (responseError) {
         if (mounted) {
           setState(() {});
@@ -71,7 +67,7 @@ class _AddToCartState extends State<AddToCart> {
               style: _style,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.network(
@@ -93,22 +89,20 @@ class _AddToCartState extends State<AddToCart> {
             ELB(
               text: 'Add to Cart',
               onPressed: () {
-                setState(() {
-                  addToCart();
-                });
+                setState(addToCart);
 
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('INFO'),
-                      content: Text('Item added to Cart.'),
+                      title: const Text('INFO'),
+                      content: const Text('Item added to Cart.'),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('OK'),
+                          child: const Text('OK'),
                         ),
                       ],
                     );

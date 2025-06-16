@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 
 class ELB extends StatelessWidget {
+
+  const ELB({
+    required this.text, required this.onPressed, super.key,
+    this.background = Colors.blue,
+    this.foreground = Colors.white,
+  });
   final String text;
   final VoidCallback onPressed;
   final Color background;
   final Color foreground;
-
-  const ELB({
-    super.key,
-    required this.text,
-    required this.onPressed,
-    this.background = Colors.blue,
-    this.foreground = Colors.white,
-  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Align(
-        alignment: Alignment.center,
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(

@@ -17,8 +17,8 @@ class _LoginUserState extends State<LoginUser> {
   TextEditingController _username = TextEditingController();
   TextEditingController _password = TextEditingController();
 
-  void getUserID() async {
-    final SharedPreferences shaPre = await SharedPreferences.getInstance();
+  Future<void> getUserID() async {
+    final shaPre = await SharedPreferences.getInstance();
     await shaPre.setString('get_uid_user', uidUser);
   }
 
@@ -31,20 +31,20 @@ class _LoginUserState extends State<LoginUser> {
   }
 
   Future login() async {
-    var response = await http.post(Uri.parse(URL.loginUser), headers: {
-      'Accept': "application/json"
+    final response = await http.post(Uri.parse(URL.loginUser), headers: {
+      'Accept': 'application/json'
     }, body: {
       'username': _username.text,
       'password': _password.text,
     });
     try {
-      var data = json.decode(response.body);
+      final data = json.decode(response.body);
       if (data != null) {
-        for (var singleUser in data) {
-          final SharedPreferences shaPre =
+        for (final singleUser in data) {
+          final shaPre =
               await SharedPreferences.getInstance();
           await shaPre.setString('get_id', singleUser['id']);
-          uidUser = singleUser["id"];
+          uidUser = singleUser['id'];
           getUserID();
         }
         if (!mounted) return;
@@ -87,7 +87,7 @@ class _LoginUserState extends State<LoginUser> {
                 focus: true,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "username cannot be empty";
+                    return 'username cannot be empty';
                   }
                 },
               ),
@@ -98,7 +98,7 @@ class _LoginUserState extends State<LoginUser> {
                 textInputAction: TextInputAction.done,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "password cannot be empty";
+                    return 'password cannot be empty';
                   }
                 },
               ),
@@ -110,7 +110,7 @@ class _LoginUserState extends State<LoginUser> {
                   if (loginKey.currentState!.validate()) {
                     setState(() {
                       login();
-                      print("user id is: $uidUser");
+                      print('user id is: $uidUser');
                     });
                   }
                 },

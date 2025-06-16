@@ -14,11 +14,11 @@ class CraftDelete extends StatefulWidget {
 
 class _CraftDeleteState extends State<CraftDelete> {
   Future<void> deleteData(String id) async {
-    var res = await http.post(Uri.parse(URL.deleteCraftAdmin), body: {
-      "id": id,
+    final res = await http.post(Uri.parse(URL.deleteCraftAdmin), body: {
+      'id': id,
     });
-    var response = json.decode(res.body);
-    if (response["success"] == "true") {
+    final response = json.decode(res.body);
+    if (response['success'] == 'true') {
       print('success');
     }
   }
@@ -26,20 +26,20 @@ class _CraftDeleteState extends State<CraftDelete> {
   Future<List<CraftModel>> getRequest() async {
     final response = await http.get(
       Uri.parse(
-        "http://$iPAddress/Hope/admin_craft_display.php",
+        'http://$iPAddress/Hope/admin_craft_display.php',
       ),
     );
-    var responseData = json.decode(response.body);
+    final responseData = json.decode(response.body);
     //Creating a list to store input data;
-    List<CraftModel> crafts = [];
-    for (var singleUser in responseData) {
-      CraftModel craft = CraftModel(
-        name: singleUser["name"].toString(),
-        id: singleUser["id"].toString(),
-        craftID: singleUser["craft_id"].toString(),
-        price: singleUser["price"].toString(),
-        description: singleUser["description"].toString(),
-        image: singleUser["image"].toString(),
+    final crafts = <CraftModel>[];
+    for (final singleUser in responseData) {
+      final craft = CraftModel(
+        name: singleUser['name'].toString(),
+        id: singleUser['id'].toString(),
+        craftID: singleUser['craft_id'].toString(),
+        price: singleUser['price'].toString(),
+        description: singleUser['description'].toString(),
+        image: singleUser['image'].toString(),
       );
       crafts.add(craft);
     }
@@ -50,7 +50,7 @@ class _CraftDeleteState extends State<CraftDelete> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("C R A F T - S H O P"),
+        title: const Text('C R A F T - S H O P'),
         actions: [
           IconButton(
             onPressed: () {
@@ -58,15 +58,15 @@ class _CraftDeleteState extends State<CraftDelete> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('INFO'),
-                      content: Text(
+                      title: const Text('INFO'),
+                      content: const Text(
                           'To update or delete the items swipe to the right on the tiles.'),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('Understood'),
+                          child: const Text('Understood'),
                         ),
                       ],
                     );
@@ -88,11 +88,11 @@ class _CraftDeleteState extends State<CraftDelete> {
             );
           } else if (snapshot.hasError) {
             return Center(
-              child: Text("Error: ${snapshot.error}"),
+              child: Text('Error: ${snapshot.error}'),
             );
           } else if (!snapshot.hasData || snapshot.data.isEmpty) {
             return const Center(
-              child: Text("No crafts available."),
+              child: Text('No crafts available.'),
             );
           } else {
             return ListView.builder(
@@ -132,7 +132,6 @@ class _CraftDeleteState extends State<CraftDelete> {
                           height: 80,
                           width: 80,
                           decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
                             image: DecorationImage(
                               image: NetworkImage(
                                 snapshot.data[index].image,
@@ -145,7 +144,7 @@ class _CraftDeleteState extends State<CraftDelete> {
                           snapshot.data[index].name,
                         ),
                         trailing: Text(
-                          "Price: ${snapshot.data[index].price}",
+                          'Price: ${snapshot.data[index].price}',
                         ),
                       ),
                     ),

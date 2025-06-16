@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 class EventEdit extends StatefulWidget {
-  const EventEdit({super.key, required this.eventUser});
+  const EventEdit({required this.eventUser, super.key});
 
   final EventModel eventUser;
 
@@ -30,7 +30,7 @@ class _EventEditState extends State<EventEdit> {
   DateTime? selectedDate;
 
   Future<void> _selectDate(BuildContext context) async {
-    DateTime? picked = await showDatePicker(
+    final picked = await showDatePicker(
       context: context,
       initialDate: selectedDate ?? DateTime.now(),
       firstDate: DateTime(2000),
@@ -47,14 +47,14 @@ class _EventEditState extends State<EventEdit> {
   TimeOfDay? selectedTime;
 
   Future<void> _selectTime(BuildContext context) async {
-    TimeOfDay? picked = await showTimePicker(
+    final picked = await showTimePicker(
       context: context,
       initialTime: selectedTime ?? TimeOfDay.now(),
     );
     if (picked != null) {
       setState(() {
         selectedTime = picked;
-        String formattedTime = DateFormat('hh:mm a').format(
+        final formattedTime = DateFormat('hh:mm a').format(
           DateTime(2023, 1, 1, picked.hour, picked.minute),
         );
         _eventTime.text = formattedTime;
@@ -62,10 +62,10 @@ class _EventEditState extends State<EventEdit> {
     }
   }
 
-  void update() async {
+  Future<void> update() async {
     final response = await http
-        .post(Uri.parse("http://$iPAddress/Hope/admin_edit_event.php"), body: {
-      "id": widget.eventUser.id.toString(),
+        .post(Uri.parse('http://$iPAddress/Hope/admin_edit_event.php'), body: {
+      'id': widget.eventUser.id,
       'name': _eventName.text.trim(),
       'event_date': _eventDate.text.trim(),
       'event_time': _eventTime.text.trim(),

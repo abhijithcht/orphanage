@@ -32,7 +32,7 @@ class _EventRegisterState extends State<EventRegister> {
   DateTime? selectedDate;
 
   Future<void> _selectDate(BuildContext context) async {
-    DateTime? picked = await showDatePicker(
+    final picked = await showDatePicker(
       context: context,
       initialDate: selectedDate ?? DateTime.now(),
       firstDate: DateTime(2000),
@@ -49,14 +49,14 @@ class _EventRegisterState extends State<EventRegister> {
   TimeOfDay? selectedTime;
 
   Future<void> _selectTime(BuildContext context) async {
-    TimeOfDay? picked = await showTimePicker(
+    final var picked = await showTimePicker(
       context: context,
       initialTime: selectedTime ?? TimeOfDay.now(),
     );
     if (picked != null) {
       setState(() {
         selectedTime = picked;
-        String formattedTime = DateFormat('hh:mm a').format(
+        final var formattedTime = DateFormat('hh:mm a').format(
           DateTime(2023, 1, 1, picked.hour, picked.minute),
         );
         _eventTime.text = formattedTime;
@@ -65,14 +65,14 @@ class _EventRegisterState extends State<EventRegister> {
   }
 
   Future<void> submit() async {
-    Map<String, String> mapedData = {
+    final mapedData = <String, String>{
       'name': _eventName.text.trim(),
       'event_date': _eventDate.text.trim(),
       'event_time': _eventTime.text.trim(),
       'description': _description.text.trim(),
       'uid': uidUser,
     };
-    http.Response response =
+    final response =
         await http.post(Uri.parse(URL.eventRegisterUser), body: mapedData);
     if (response.body.isEmpty) {
       if (mounted) {
@@ -82,9 +82,9 @@ class _EventRegisterState extends State<EventRegister> {
         });
       }
     } else {
-      var data = jsonDecode(response.body);
-      var responseMessage = data["message"];
-      var responseError = data["error"];
+      final data = jsonDecode(response.body);
+      final responseMessage = data['message'];
+      final responseError = data['error'];
       if (responseError) {
         if (mounted) {
           setState(() {
@@ -126,7 +126,7 @@ class _EventRegisterState extends State<EventRegister> {
                 textCapitalization: TextCapitalization.sentences,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Event name cannot be empty";
+                    return 'Event name cannot be empty';
                   }
                 },
               ),
@@ -139,7 +139,7 @@ class _EventRegisterState extends State<EventRegister> {
                 },
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Date cannot be empty";
+                    return 'Date cannot be empty';
                   }
                 },
               ),
@@ -152,7 +152,7 @@ class _EventRegisterState extends State<EventRegister> {
                 },
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Time cannot be empty";
+                    return 'Time cannot be empty';
                   }
                 },
               ),
@@ -162,7 +162,7 @@ class _EventRegisterState extends State<EventRegister> {
                 textInputAction: TextInputAction.done,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Description cannot be empty";
+                    return 'Description cannot be empty';
                   }
                 },
               ),

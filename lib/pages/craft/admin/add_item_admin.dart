@@ -52,15 +52,15 @@ class _CraftAddState extends State<CraftAdd> {
   }
 
   Future uploadImage() async {
-    final uri = Uri.parse("http://$iPAddress/Hope/admin_add_craft_item.php");
-    var request = http.MultipartRequest('POST', uri);
+    final uri = Uri.parse('http://$iPAddress/Hope/admin_add_craft_item.php');
+    final request = http.MultipartRequest('POST', uri);
     request.fields['price'] = price.text;
     request.fields['craft_id'] = craftID.text;
     request.fields['name'] = name.text;
     request.fields['description'] = description.text;
-    var pic = await http.MultipartFile.fromPath("image", _image.path);
+    final pic = await http.MultipartFile.fromPath('image', _image.path);
     request.files.add(pic);
-    var response = await request.send();
+    final response = await request.send();
     print(response);
 
     if (response.statusCode == 200) {
@@ -86,7 +86,7 @@ class _CraftAddState extends State<CraftAdd> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          "ADD CRAFT SHOP ITEM",
+          'ADD CRAFT SHOP ITEM',
         ),
       ),
       body: Form(
@@ -96,42 +96,42 @@ class _CraftAddState extends State<CraftAdd> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TFF(
-                hintText: "Craft ID",
+                hintText: 'Craft ID',
                 controller: craftID,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Craft ID cannot be empty";
+                    return 'Craft ID cannot be empty';
                   }
                 },
               ),
               TFF(
-                hintText: "Craft Item name",
+                hintText: 'Craft Item name',
                 controller: name,
                 textCapitalization: TextCapitalization.sentences,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Craft Item cannot be empty";
+                    return 'Craft Item cannot be empty';
                   }
                 },
               ),
               TFF(
-                hintText: "Item price",
+                hintText: 'Item price',
                 controller: price,
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Item price cannot be empty";
+                    return 'Item price cannot be empty';
                   }
                 },
               ),
               TFF(
-                hintText: "Item description",
+                hintText: 'Item description',
                 controller: description,
                 textCapitalization: TextCapitalization.sentences,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return "Description cannot be empty";
+                    return 'Description cannot be empty';
                   }
                 },
               ),
@@ -142,7 +142,7 @@ class _CraftAddState extends State<CraftAdd> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Choose Image",
+                    'Choose Image',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.green,
@@ -153,18 +153,14 @@ class _CraftAddState extends State<CraftAdd> {
                       Icons.photo_outlined,
                       size: 35,
                     ),
-                    onPressed: () {
-                      chooseImageGallery();
-                    },
+                    onPressed: chooseImageGallery,
                   ),
                   IconButton(
                     icon: const Icon(
                       Icons.camera_alt_outlined,
                       size: 35,
                     ),
-                    onPressed: () {
-                      chooseImageCamera();
-                    },
+                    onPressed: chooseImageCamera,
                   ),
                 ],
               ),
@@ -181,7 +177,7 @@ class _CraftAddState extends State<CraftAdd> {
                           )
                         : Center(
                             child: Text(
-                              "No image selected",
+                              'No image selected',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.red[900],

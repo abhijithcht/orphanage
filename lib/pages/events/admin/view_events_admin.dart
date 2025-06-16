@@ -14,16 +14,16 @@ class EventView2 extends StatefulWidget {
 class _EventView2State extends State<EventView2> {
   Future<List<EventModel>> getRequest() async {
     final response = await http.get(Uri.parse(URL.viewEventAdmin));
-    var responseData = jsonDecode(response.body);
+    final responseData = jsonDecode(response.body);
 
-    List<EventModel> events = [];
-    for (var singleUser in responseData) {
-      EventModel event = EventModel(
-        id: singleUser["id"].toString(),
-        name: singleUser["name"].toString(),
-        eventDate: singleUser["event_date"].toString(),
-        eventTime: singleUser["event_time"].toString(),
-        description: singleUser["description"].toString(),
+    final events = <EventModel>[];
+    for (final singleUser in responseData) {
+      final event = EventModel(
+        id: singleUser['id'].toString(),
+        name: singleUser['name'].toString(),
+        eventDate: singleUser['event_date'].toString(),
+        eventTime: singleUser['event_time'].toString(),
+        description: singleUser['description'].toString(),
       );
       events.add(event);
     }
@@ -71,7 +71,7 @@ class _EventView2State extends State<EventView2> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8),
                             child: ListTile(
                               title: Text(snapshot.data![index].name),
                               subtitle: Row(

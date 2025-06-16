@@ -14,15 +14,15 @@ class FoodView extends StatefulWidget {
 class _FoodViewState extends State<FoodView> {
   Future<List<FoodModel>> getRequest() async {
     final response = await http.get(Uri.parse(URL.viewFoodDonationUser));
-    var responseData = jsonDecode(response.body);
+    final responseData = jsonDecode(response.body);
 
-    List<FoodModel> foods = [];
-    for (var singleUser in responseData) {
-      FoodModel food = FoodModel(
-        id: singleUser["id"].toString(),
-        date: singleUser["date"].toString(),
-        donor: singleUser["donor"].toString(),
-        food: singleUser["food"].toString(),
+    final foods = <FoodModel>[];
+    for (final singleUser in responseData) {
+      final food = FoodModel(
+        id: singleUser['id'].toString(),
+        date: singleUser['date'].toString(),
+        donor: singleUser['donor'].toString(),
+        food: singleUser['food'].toString(),
       );
       foods.add(food);
     }
@@ -70,7 +70,7 @@ class _FoodViewState extends State<FoodView> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8),
                             child: ListTile(
                               title: Text(snapshot.data![index].donor),
                               leading: Text(snapshot.data![index].food),

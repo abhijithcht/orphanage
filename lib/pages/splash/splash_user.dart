@@ -29,19 +29,17 @@ class _SplashUserState extends State<SplashUser> {
               );
       });
     });
-    setState(() {
-      getUserID();
-    });
+    setState(getUserID);
     super.initState();
   }
 
   Future<void> getValidationData() async {
-    SharedPreferences shaPre = await SharedPreferences.getInstance();
-    var obtainedEmail = shaPre.getString('get_id');
+    final shaPre = await SharedPreferences.getInstance();
+    final obtainedEmail = shaPre.getString('get_id');
     setState(() {
       sessionUserKey = obtainedEmail;
     });
-    print("this is session value $sessionUserKey");
+    print('this is session value $sessionUserKey');
   }
 
   @override
@@ -55,7 +53,7 @@ class _SplashUserState extends State<SplashUser> {
             SizedBox(height: 10),
             CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-              strokeWidth: 4.0,
+              strokeWidth: 4,
             ),
           ],
         ),
@@ -64,8 +62,8 @@ class _SplashUserState extends State<SplashUser> {
   }
 
   Future<void> getUserID() async {
-    SharedPreferences shaPre = await SharedPreferences.getInstance();
-    var obtainid = shaPre.getString('get_uid_user');
+    final shaPre = await SharedPreferences.getInstance();
+    final obtainid = shaPre.getString('get_uid_user');
     setState(() {
       uidUser = obtainid!;
     });

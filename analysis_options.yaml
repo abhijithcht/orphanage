@@ -1,11 +1,5 @@
-include: package:flutter_lints/flutter.yaml
+include: package:very_good_analysis/analysis_options.yaml
 
 linter:
   rules:
     avoid_print: false
-    prefer_const_constructors_in_immutables: false
-    prefer_const_constructors: false
-    prefer_const_literals_to_create_immutables: false
-    prefer_final_fields: false
-    unnecessary_breaks: true
-    use_key_in_widget_constructors: false
